@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { send } = require('express/lib/response');
 
 const app = express();
 
@@ -72,7 +73,7 @@ app.get('/lista/:name', (pedido,respuesta) =>
 
 
 
-app.put('/lista/:name', (pedido,respuesta) => {
+app.put('/lista/:name/song', (pedido,respuesta) => {
     console.log("Otro");
     let name = pedido.params.name
     let ifExist = coleccion.some(x => x.nombre == name)
@@ -101,7 +102,7 @@ app.put('/lista/:name', (pedido,respuesta) => {
     }
 })
 
-app.delete('/:name', (pedido, respuesta) => {
+app.delete('/lista/:name', (pedido, respuesta) => {
     let ver = coleccion.some(x => x.nombre == pedido.params.name)
     if (ver == true) {
         coleccion = coleccion.filter(x => x.nombre != pedido.params.name)
@@ -112,8 +113,70 @@ app.delete('/:name', (pedido, respuesta) => {
     else respuesta.status(404, "No found").send()
 })
 
+app.get('/lista/:name/song', (pedido,respuesta) => {
+    let name = pedido.params.name
+    if ((coleccion.some(x => x.nombre == name))== true) {
+        let cancion = coleccion.filter(x => x.nombre == name).at(0)
+        respuesta.send(cancion.song)
+        console.log(cancion.song)
+    }
+    else {
+        respuesta.status(404).send("No se encuentra la lista")
+    }
+})
+
+app.get('/lista/:name/song/:titulo', (pedido, respuesta) => {
+    let name = pedido.params.name
+    let title = pedido.params.titulo
+    console.log("GET aaaaa")
+    if ((coleccion.some(x => x.nombre == name))== true) {
+        let nomAlbum = coleccion.filter(x => x.nombre == name).at(0)
+        if ((nomAlbum.song.some(x => x.titulo == title)) == true) {
+            let cancion = nomAlbum.song.filter(x => x.titulo == title).at(0)
+            respuesta.send(cancion)
+        }
+        else respuesta.send(404, "No Found")
+    }
+    else {
+        respuesta.status(404, "No Found").send("No se encuentra la lista")
+    }
+})
+
+
+app.post('/lista/:name/song', (pedido, respuesta) => {
+    let name = pedido.params.name
+    if ((coleccion.some(x => x.nombre == name))== true) {
+        let cancion = coleccion.filter(x => x.nombre == name).at(0)
+        if (pedido.body.titulo != null) {
+            coleccion = coleccion.filter(x => x.nombre != name)
+            cancion.song.push(pedido.body)
+            coleccion.push(cancion)
+            respuesta.send(cancion)
+        }
+        else respuesta.status(404).send("Bad request")
+    }
+    else {
+        respuesta.status(404).send("No se encuentra la lista")
+    }
+})
 
 app.listen(port)
+
+
+
+
+
+// {
+//     "titulo": "Skill",
+//     "artista": "Hero",
+//     "nomAlbum": "Lan",
+//     "añoEdicion": 2003
+// }
+
+
+
+
+
 
 // [
 //     {"nombre": "Moderna",
