@@ -1,0 +1,15 @@
+{
+  "name": "musica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "node app.js"
+  },
+  "author": "Beymar Leon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
