@@ -73,7 +73,7 @@ app.get('/lista/:name', (pedido,respuesta) =>
 
 
 
-app.put('/lista/:name/song', (pedido,respuesta) => {
+app.put('/lista/:name', (pedido,respuesta) => {
     console.log("Otro");
     let name = pedido.params.name
     let ifExist = coleccion.some(x => x.nombre == name)
@@ -97,7 +97,7 @@ app.put('/lista/:name/song', (pedido,respuesta) => {
             });
             cancion = remplazo;
             coleccion[pocision] = cancion;
-            respuesta.status(204, "No Content").send()
+            respuesta.status(204, "No Content").send()  
         }
     }
 })
@@ -112,6 +112,13 @@ app.delete('/lista/:name', (pedido, respuesta) => {
     }
     else respuesta.status(404, "No found").send()
 })
+
+
+
+
+
+
+
 
 app.get('/lista/:name/song', (pedido,respuesta) => {
     let name = pedido.params.name
@@ -128,7 +135,6 @@ app.get('/lista/:name/song', (pedido,respuesta) => {
 app.get('/lista/:name/song/:titulo', (pedido, respuesta) => {
     let name = pedido.params.name
     let title = pedido.params.titulo
-    console.log("GET aaaaa")
     if ((coleccion.some(x => x.nombre == name))== true) {
         let nomAlbum = coleccion.filter(x => x.nombre == name).at(0)
         if ((nomAlbum.song.some(x => x.titulo == title)) == true) {
@@ -159,6 +165,41 @@ app.post('/lista/:name/song', (pedido, respuesta) => {
         respuesta.status(404).send("No se encuentra la lista")
     }
 })
+
+app.put('/lista/:name/song/:titulo', (pedido, respuesta) => {
+    let name = pedido.params.name;
+    let title = pedido.params.titulo;
+    if ((coleccion.some(x => x.nombre == name)) == true) {
+        let nomAlbum = coleccion.filter(x => x.nombre == name).at(0)
+        console.log("Dentro del primer if");
+        if ((nomAlbum.song.some(x => x.titulo == title)) == true) {
+            let cancion = nomAlbum.song.filter(x => x.titulo == title)
+            console.log("Dentro del segundo if");
+            if (pedido.body.titulo == title) {
+                console.log("Dentro del tercer if");
+                let i = coleccion.indexOf(nomAlbum)
+                console.log(i);
+                let a = coleccion[i]
+                let b = a.song.indexOf(cancion)
+                console.log(b);
+                coleccion[i].song[0].añoEdicion = "sdfsdfsdf"
+                // nomAlbum.song = pedido.body
+                // console.log(cancion);
+                // let index = coleccion.indexOf(cancion.title, 0)
+                // let i = coleccion[index].song.findIndex(x => x.titulo == title)
+                // coleccion[index].song == nomAlbum;
+                // console.log(i);
+            }
+        }
+    }
+    else respuesta.status(404, "No Found").send()
+    respuesta.send();
+})
+
+
+
+
+
 
 app.listen(port)
 
