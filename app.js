@@ -205,6 +205,8 @@ app.delete('/lista/:name/song/:titulo', (pedido, respuesta) => {
         }
         else respuesta.status(404, "No Found").send()
     }
+    else respuesta.status(404, "No Found").send()
+    respuesta.send()
 })
 
 app.listen(port)
