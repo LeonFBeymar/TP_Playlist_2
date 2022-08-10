@@ -1,9 +1,11 @@
 const express = require('express');
-const { send } = require('express/lib/response');
 
 const app = express();
 
-const port = 3000;
+require('dotenv').config()
+console.log(process.env)
+const port = process.env.PORT
+
 
 //midlewire
 app.use(express.json())
