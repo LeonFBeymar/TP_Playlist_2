@@ -3,8 +3,10 @@ const express = require('express');
 const app = express();
 
 require('dotenv').config()
-console.log(process.env)
 const port = process.env.PORT
+
+console.log("esta corriendo en el puerto: "+ port)
+
 
 
 //midlewire
