@@ -1,10 +1,15 @@
 import express, { json } from 'express';
+import morgan from 'morgan';
+import 'dotenv/config'
 
 const app = express();
 //midlewire
 app.use(json())
+app.use(morgan('dev'));
 
-const port = 3000
+const port = process.env.PORT || 3002
+
+// const port = 3000
 
 var coleccion = [
     {
@@ -33,6 +38,7 @@ var coleccion = [
 //GET
 app.get('/lista', (req, res) => {
     res.send(coleccion)
+    res.send(accessLogStream)
 })
 
 //POST
@@ -156,7 +162,7 @@ app.delete('/lista/:name/song/:titulo', (req, res) => {
     let nomAlbum = coleccion.find(x => x.nombre == name)
     if (nomAlbum != null) {
         let cancion = nomAlbum.song.find(x => x.titulo == title)
-        
+
         if (cancion != null) {
             let iColeccion = coleccion.indexOf(nomAlbum)
             let iCancion = nomAlbum.song.indexOf(cancion)
