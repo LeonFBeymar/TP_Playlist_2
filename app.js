@@ -1,8 +1,8 @@
-const express = require('express');
+import express, { json } from 'express';
 
 const app = express();
 //midlewire
-app.use(express.json())
+app.use(json())
 
 const port = 3000
 
