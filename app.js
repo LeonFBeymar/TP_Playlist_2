@@ -50,7 +50,7 @@ app.post('/lista', (req, res) => {
 //GET   
 app.get('/lista/:name', (req, res) => {
     let name = req.params.name
-    let cancion = coleccion.find(x => x.nombre == name).at(0)
+    let cancion = coleccion.find(x => x.nombre == name)
     if (cancion == null) {
         res.status(404, "No Found").send()
     }
@@ -60,7 +60,7 @@ app.get('/lista/:name', (req, res) => {
 //PUT           
 app.put('/lista/:name', (req, res) => {
     let name = req.params.name;
-    let cancion = coleccion.find(x => x.nombre == name).at(0);
+    let cancion = coleccion.find(x => x.nombre == name)
     if (cancion != null) {
         if (req.body[0].nombre == name) {
             let a = coleccion.indexOf(cancion)
@@ -92,7 +92,7 @@ app.delete('/lista/:name', (req, res) => {
 //Parte 2
 app.get('/lista/:name/song', (req, res) => {
     let name = req.params.name
-    let cancion = coleccion.find(x => x.nombre == name).at(0)
+    let cancion = coleccion.find(x => x.nombre == name)
     if (cancion != true) {
         res.send(cancion.song)
     }
@@ -102,9 +102,9 @@ app.get('/lista/:name/song', (req, res) => {
 app.get('/lista/:name/song/:titulo', (req, res) => {
     let name = req.params.name
     let title = req.params.titulo
-    let nomAlbum = coleccion.find(x => x.nombre == name).at(0)
+    let nomAlbum = coleccion.find(x => x.nombre == name)
     if (nomAlbum != null) {
-        let cancion = nomAlbum.song.find(x => x.titulo == title).at(0)
+        let cancion = nomAlbum.song.find(x => x.titulo == title)
         if (cancion != null)
             res.send(cancion)
         else res.status(404, "No Found").send("No se encuentra la cancion")
@@ -115,7 +115,7 @@ app.get('/lista/:name/song/:titulo', (req, res) => {
 
 app.post('/lista/:name/song', (req, res) => {
     let name = req.params.name
-    let nomAlbum = coleccion.find(x => x.nombre == name).at(0)
+    let nomAlbum = coleccion.find(x => x.nombre == name)
     if (nomAlbum != null) {
         if (req.body.titulo != null && req.body.titulo != "") {
             nomAlbum.song.push(req.body)
@@ -131,9 +131,9 @@ app.post('/lista/:name/song', (req, res) => {
 app.put('/lista/:name/song/:titulo', (req, res) => {
     let name = req.params.name;
     let title = req.params.titulo;
-    let nomAlbum = coleccion.find(x => x.nombre == name).at(0)
+    let nomAlbum = coleccion.find(x => x.nombre == name)
     if (nomAlbum != null) {
-        let cancion = nomAlbum.song.find(x => x.titulo == title).at(0)
+        let cancion = nomAlbum.song.find(x => x.titulo == title)
         if (cancion != null) {
             if (req.body.titulo == title) {
                 let iColeccion = coleccion.indexOf(nomAlbum)
@@ -153,9 +153,9 @@ app.put('/lista/:name/song/:titulo', (req, res) => {
 app.delete('/lista/:name/song/:titulo', (req, res) => {
     let name = req.params.name
     let title = req.params.titulo
-    let nomAlbum = coleccion.find(x => x.nombre == name).at(0)
+    let nomAlbum = coleccion.find(x => x.nombre == name)
     if (nomAlbum != null) {
-        let cancion = nomAlbum.song.find(x => x.titulo == title).at(0)
+        let cancion = nomAlbum.song.find(x => x.titulo == title)
         if (cancion != null) {
             let iColeccion = coleccion.indexOf(nomAlbum)
             let iCancion = nomAlbum.song.indexOf(cancion)
