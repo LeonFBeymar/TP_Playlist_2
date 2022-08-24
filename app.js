@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import 'dotenv/config';
 //importar el archivo usuarioRoutes del archivo usuario.routes.js
 import cancionRoutes from './routes/cancion.routes';
+
+import database from './database'
 //crea la aplicacion 
 const app = express();
 
