@@ -156,6 +156,7 @@ app.delete('/lista/:name/song/:titulo', (req, res) => {
     let nomAlbum = coleccion.find(x => x.nombre == name)
     if (nomAlbum != null) {
         let cancion = nomAlbum.song.find(x => x.titulo == title)
+        
         if (cancion != null) {
             let iColeccion = coleccion.indexOf(nomAlbum)
             let iCancion = nomAlbum.song.indexOf(cancion)
