@@ -10,47 +10,21 @@ import database from './database'
 //crea la aplicacion 
 const app = express();
 
-//midlewire
+
+//Definimos el puerto
+const port = process.env.PORT || 3001
+//Middlewire
+//lee el body en formato json
 app.use(json());
 //imprime las acciones hacia cada endopoint en la terminal
 app.use(morgan('dev'));
-
+//endpoints
 app.use(cancionRoutes)
 
-const port = process.env.PORT || 3001
+// app.use(database)
+
+
+//Escuchamos la puerto
 app.listen(port, () => {
     console.log(`Escuchando pedidos en PORT: ${port}`)
 })
-
-
-// {
-//     "titulo": "Skill",
-//     "artista": "Hero",
-//     "nomAlbum": "Lan",
-//     "añoEdicion": 2003
-// }
-
-
-
-// [
-//     {"nombre": "Moderna",
-//             "descripcion": "sadcoreverfannnn",
-//             "song":[
-//               {
-//                 "titulo": "",
-//                 "descripcion": "Musica creada cerca de los 90",
-//                 "duracion": 3500
-//               },
-//               {
-//                 "titulo": "Linkin Park",
-//                 "descripcion": "Musica creada cerca de los 2000",
-//                 "duracion": 4000
-//               },
-//               {
-//                 "titulo": "Porta",
-//                 "descripcion": "Musica creada cerca de los 2005",
-//                 "duracion": 7000
-//               }
-//             ]
-//     }
-// ]
