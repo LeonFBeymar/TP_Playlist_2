@@ -179,7 +179,7 @@ router.get('/lista/:name/song/:titulo', async(req, res) => {
         let name = req.params.name
         let titles = req.params.titulo
         const cancion = await Cancion.findOne({nombre:name})
-        const songCancion = await cancion.song.find(x => x.titulo = titles)
+        const songCancion = await cancion.song.find(x => x.titulo == titles)
         res.send(songCancion)
     } catch (err) {
         res.status(500).send(err)
@@ -245,15 +245,14 @@ router.put('/lista/:name/song/:titulo', async (req, res) => {
         let name = req.params.name
         let titles = req.params.titulo
         let cancionUpdate = req.body
-        // await Cancion.findOneAndUpdate({nombre:name,titulo:titles}, cancionUpdate)
-        // res.send()
         let cancion = await Cancion.findOne({nombre:name})
         let songCancion = await cancion.song.find(x => x.titulo == titles)
-        let pocision = await cancion.song.indexOf(songCancion)
-        cancion.song[pocision].nomAlbum = cancionUpdate.nomAlbum
-        cancion.song[pocision].añoEdicion = cancionUpdate.añoEdicion
-        cancion.song[pocision].artista = cancionUpdate.artista
-        await Cancion.replaceOne({nombre:name}, cancion)
+        await Cancion.findOneAndUpdate({cancionSchema:cancion},cancionUpdate)
+        // let pocision = await cancion.song.indexOf(songCancion)
+        // cancion.song[pocision].nomAlbum = cancionUpdate.nomAlbum
+        // cancion.song[pocision].añoEdicion = cancionUpdate.añoEdicion
+        // cancion.song[pocision].artista = cancionUpdate.artista
+        // await Cancion.replaceOne({nombre:name}, cancion)
         res.send("Actualizado")
 
     } catch (err) {

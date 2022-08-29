@@ -10,9 +10,9 @@ import database from './database'
 //crea la aplicacion 
 const app = express();
 
-
 //Definimos el puerto
 const port = process.env.PORT || 3001
+
 //Middlewire
 //lee el body en formato json
 app.use(json());
@@ -22,8 +22,6 @@ app.use(morgan('dev'));
 app.use(cancionRoutes)
 
 // app.use(database)
-
-
 //Escuchamos la puerto
 app.listen(port, () => {
     console.log(`Escuchando pedidos en PORT: ${port}`)
