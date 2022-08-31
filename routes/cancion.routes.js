@@ -242,19 +242,14 @@ router.post('/lista/:name/song', async(req, res) => {
 
 router.put('/lista/:name/song/:titulo', async (req, res) => {
     try {
-        let name = req.params.name
-        let titles = req.params.titulo
-        let cancionUpdate = req.body
-        let cancion = await Cancion.findOne({nombre:name})
-        let songCancion = await cancion.song.find(x => x.titulo == titles)
-        await Cancion.findOneAndUpdate({cancionSchema:cancion},cancionUpdate)
-        // let pocision = await cancion.song.indexOf(songCancion)
-        // cancion.song[pocision].nomAlbum = cancionUpdate.nomAlbum
-        // cancion.song[pocision].añoEdicion = cancionUpdate.añoEdicion
-        // cancion.song[pocision].artista = cancionUpdate.artista
-        // await Cancion.replaceOne({nombre:name}, cancion)
-        res.send("Actualizado")
-
+        let name = req.params.name;
+        let titles = req.params.titulo;
+        let cancionUpdate = req.body;
+        let cancion = await Cancion.findOne({nombre:name});
+        let i = await cancion.song.findIndex(x => x.titulo == titles)
+        cancion.song[i] = cancionUpdate
+        await Cancion.findOneAndUpdate({nombre:name},cancion);
+        res.send("Actualizado");
     } catch (err) {
         res.status(500).send(err)
     }
