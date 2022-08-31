@@ -8,7 +8,7 @@ export const leerPlaylist = async (rec, res)=>{
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const crearColeccion = async(req, res)=>{
     try{
         const cancion = req.body
@@ -18,7 +18,7 @@ export const crearColeccion = async(req, res)=>{
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const leerColeccion = async(req, res) => {
     try {
         const name = req.params.name
@@ -28,7 +28,7 @@ export const leerColeccion = async(req, res) => {
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const actualizarColeccion = async(req, res) => {
     try {
         let name = req.params.name
@@ -40,7 +40,7 @@ export const actualizarColeccion = async(req, res) => {
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const borrarColeccion = async(req, res) => {
     try {
         let name = req.params.name
@@ -52,8 +52,8 @@ export const borrarColeccion = async(req, res) => {
 }
 
 
-
-
+// ----------------------------------------------------------------------------------
+// Parte dos
 export const leerCanciones = async(req, res) => {
     try {
         const name = req.params.name
@@ -63,7 +63,7 @@ export const leerCanciones = async(req, res) => {
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const leerCancion = async(req, res) => {
     try {
         let name = req.params.name
@@ -75,7 +75,7 @@ export const leerCancion = async(req, res) => {
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const crearCancion = async(req, res) => {
     try {
         let name = req.params.name  
@@ -88,7 +88,7 @@ export const crearCancion = async(req, res) => {
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const actualizarCancion = async (req, res) => {
     try {
         let name = req.params.name;
@@ -105,7 +105,7 @@ export const actualizarCancion = async (req, res) => {
         res.status(500).send(err)
     }
 }
-
+// ----------------------------------------------------------------------------------
 export const borrarCancion = async(req, res)=> {
     try {
         let name = req.params.name

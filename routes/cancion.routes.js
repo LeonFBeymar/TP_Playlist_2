@@ -3,7 +3,7 @@ const router = Router()
 import {leerPlaylist, crearColeccion, leerColeccion,
     actualizarColeccion,borrarColeccion,leerCanciones,
     leerCancion,crearCancion, actualizarCancion, borrarCancion} from '../controllers/cancion.controllers'
-
+// ----------------------------------------------------------------------------------
 // var coleccion = [
     // {
     //     "nombre": "Lan",
@@ -26,30 +26,21 @@ import {leerPlaylist, crearColeccion, leerColeccion,
     // }
 // ]
 
+// ----------------------------------------------------------------------------------
 //Endpoints
 
-//GET
 router.get('/lista', leerPlaylist)
 
-//POST
 router.post('/lista', crearColeccion)
-
-//GET   
+ 
 router.get('/lista/:name', leerColeccion)
 
-//PUT
 router.put('/lista/:name', actualizarColeccion)
 
-//DELETE
 router.delete('/lista/:name', borrarColeccion)
 
 
-
-
-
-
-
-
+// ----------------------------------------------------------------------------------
 //PARTE 2
 
 router.get('/lista/:name/song', leerCanciones)
@@ -64,7 +55,7 @@ router.delete('/lista/:name/song/:titulo', borrarCancion)
 
 export default router
 
-
+// ----------------------------------------------------------------------------------
 // {
 //     "titulo": "Skill",
 //     "artista": "Hero",
